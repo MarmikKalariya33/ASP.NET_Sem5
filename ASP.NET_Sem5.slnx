@@ -4,4 +4,5 @@
   </Folder>
   <Project Path="../ConsoleApp1/ConsoleApp1.csproj" />
   <Project Path="../MVC/MVC/MVC.csproj" />
+  <Project Path="WEBAPI/WEBAPI.csproj" Id="632a5803-9f94-40c9-9711-01deb3c3398c" />
 </Solution>
