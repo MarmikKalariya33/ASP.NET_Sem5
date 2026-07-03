@@ -1,22 +1,12 @@
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
+var builder = WebApplication.CreateBuilder(args);
 
-namespace MVC
-{
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            var builder = WebApplication.CreateBuilder(args);
+// Register MVC
+builder.Services.AddControllersWithViews();
 
-            var app = builder.Build();
+var app = builder.Build();
 
-            app.Run(async context =>
-            {
-                await context.Response.WriteAsync("Hello World!");
-            });
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=First}/{action=Index}/{id?}");
 
-            app.Run();
-        }
-    }
-}
+app.Run();
