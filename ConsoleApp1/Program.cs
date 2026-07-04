@@ -4,8 +4,8 @@
     {
         static void Main(string[] args)
         {
-            //linq2.run();
-            linq.run();
+            linq2.run();
+            //linq.run();
 
 
         }

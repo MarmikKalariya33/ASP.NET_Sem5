@@ -2,7 +2,9 @@
   <Folder Name="/Solution Items/">
     <File Path=".gitignore" />
   </Folder>
+  <Project Path="api_learn/api_learn.csproj" Id="d0a72eaf-e9ad-42e2-92e7-44d71f7d75d7" />
   <Project Path="ConsoleApp1/ConsoleApp1.csproj" />
   <Project Path="MVC/MVC.csproj" />
   <Project Path="WEBAPI/WEBAPI.csproj" Id="632a5803-9f94-40c9-9711-01deb3c3398c" />
+  <Project Path="webapi_learn/webapi_learn.csproj" Id="be7c88a0-9175-4a7d-a371-1085e0937e3a" />
 </Solution>
