@@ -1,6 +1,7 @@
 ﻿using api_learn.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 
 namespace api_learn.Controllers
 {
@@ -13,8 +14,9 @@ namespace api_learn.Controllers
         {
             _context = context;
         }
+
         [HttpGet]
-        [Route("GetAllProducts")]
+        [Route("GetAllProducts")] // security
         public List<ProductMaster> GetAllProducts()
         {
             var Products = _context.ProductMasters.ToList();
@@ -24,9 +26,24 @@ namespace api_learn.Controllers
 
         [HttpPost]
         [Route("createNewProduct")]
+       
         public ProductMaster createNewProduct(ProductMaster obj)
         {
             _context.ProductMasters.Add(obj);
+            //Insert into ProductMaster
+            _context.SaveChanges();
+            return obj;
+        }
+        [HttpPut]
+        [Route("UpdateProduct")]
+
+        public ProductMaster UpdateProduct(ProductMaster obj)
+        {
+            var Products = _context.ProductMasters.SingleOrDefault(x => x.Pro_Id == obj.Pro_Id);
+            Products.Pro_Name = obj.Pro_Name;
+            Products.Pro_Category = obj.Pro_Category;
+            Products.Pro_Qty = obj.Pro_Qty;
+            Products.Pro_Price = obj.Pro_Price;
             _context.SaveChanges();
             return obj;
         }
