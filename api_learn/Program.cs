@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using api_learn.Models;
 using System.Runtime.CompilerServices;
+using api_learn.Services;
 namespace api_learn
 {
     public class Program
@@ -20,7 +21,7 @@ namespace api_learn
 
             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
+            builder.Services.AddScoped<ProductServices>();
 
             // Add services
             builder.Services.AddControllers();
