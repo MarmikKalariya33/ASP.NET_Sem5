@@ -21,7 +21,7 @@ namespace api_learn
 
             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-            builder.Services.AddScoped<ProductServices>();
+            builder.Services.AddScoped<IProductService,ProductServices>();
 
             // Add services
             builder.Services.AddControllers();
