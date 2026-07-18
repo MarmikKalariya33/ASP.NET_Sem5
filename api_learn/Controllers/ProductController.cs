@@ -33,24 +33,22 @@ namespace api_learn.Controllers
 
         public async Task<IActionResult> createNewProduct(ProductMaster obj)
         {
-            await _context.ProductMasters.AddAsync(obj);
+            var product = await _services.CreateNewProduct(obj);
             //Insert into ProductMaster
-            _context.SaveChanges();
             return Ok(obj);
         }
 
         [HttpPut]
         [Route("UpdateProduct")]
 
-        public async Task<ProductMaster> UpdateProduct(ProductMaster obj)
+        public async Task<IActionResult> UpdateProduct(ProductMaster obj)
         {
-            var product = await _context.ProductMasters.SingleOrDefaultAsync(x => x.Pro_Id == obj.Pro_Id);
-            product.Pro_Name = obj.Pro_Name;
-            product.Pro_Category = obj.Pro_Category;
-            product.Pro_Qty = obj.Pro_Qty;
-            product.Pro_Price = obj.Pro_Price;
-            _context.SaveChanges();
-            return product;
+            var product = await _services.UpdateProduct(obj);
+            if (product == null)
+            {
+                return NotFound("Product Not Found");
+            }
+            return Ok(product);
         }
 
         [HttpDelete]
@@ -58,18 +56,12 @@ namespace api_learn.Controllers
 
         public async Task<IActionResult> Deleteproduct(int Pro_Id)
         {
-            var product = await _context.ProductMasters.SingleOrDefaultAsync(x => x.Pro_Id == Pro_Id);
-            if (product != null)
-            {
-                _context.Remove(product);
-                _context.SaveChanges();
-                return Ok(product); // ok sucess 200 
-                                    // notfound 404
-            }
-            else
+            var product = await _services.DeleteProduct(Pro_Id);
+            if (product == null)
             {
                 return NotFound();
             }
+            return Ok(product);
         }
     }
 }
