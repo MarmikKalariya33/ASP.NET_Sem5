@@ -14,7 +14,7 @@ namespace api_learn.Controllers
         public List<StudentModel> getAllStudents() // getallstudent is method and list<studentmodel> is list of all student
         {
             List<StudentModel> students = new List<StudentModel>(); // Students is variable name and
-                                       // new Lis<studentmodel> is create empty list of studentmodel class  
+                                       // new List<studentmodel> is create empty list of studentmodel class  
 
             StudentModel stu1 = new StudentModel()  // Create Student Object 
             {

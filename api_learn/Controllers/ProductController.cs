@@ -1,4 +1,5 @@
-﻿using api_learn.Models;
+﻿using api_learn.DTOs;
+using api_learn.Models;
 using api_learn.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -11,11 +12,11 @@ namespace api_learn.Controllers
     [ApiController]
     public class ProductController : ControllerBase
     {
-        private readonly ProductServices _services;
+        private readonly IProductService _services;
         private readonly AppDbContext _context;
-        public ProductController(AppDbContext context, ProductServices services)
+        public ProductController(AppDbContext context, IProductService services)
         {
-            _context = context;
+            _context = context;  // this is dependencies injections 
             _services = services;
         }
 
@@ -62,6 +63,25 @@ namespace api_learn.Controllers
                 return NotFound();
             }
             return Ok(product);
+        }
+
+        [HttpGet]
+        [Route("Getrecord")]
+        public async Task<IActionResult> Getrecord()
+        {
+            var list = await (
+                from product in _context.ProductMasters
+                join company in _context.CampanyMasters
+                on product.Cmp_Id equals company.Cmp_Id
+                select new ProductDTO
+                {
+                    ProName = product.Pro_Name,
+                    ProCategory = product.Pro_Category,
+                    ProPrice = product.Pro_Price,
+                    CmpName = company.Cmp_Name
+                }).ToListAsync();
+
+            return Ok(list);
         }
     }
 }

@@ -11,6 +11,8 @@ namespace api_learn.Models
         public string Pro_Category { get; set; } = string.Empty;
         public int Pro_Qty { get; set; }
         public decimal Pro_Price { get; set; }
+        public int Cmp_Id { get; set; }
+
 
     }
 }
