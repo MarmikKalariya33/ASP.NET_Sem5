@@ -2,11 +2,11 @@
 
 namespace Ecommerse.Model
 {
-    [Table("ecomerce")]
+    [Table("Users")]
     public class user
     {
-        public int userId { get; set }
-        public string? userName { get;set }
-        public string? userPass { get;set }
+        public int userId { get; set; }
+        public string? userName { get; set; }
+        public string? userPass { get; set; }
     }
 }

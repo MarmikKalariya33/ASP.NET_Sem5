@@ -1,12 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
-namespace Ecommerse.Model
 
+namespace Ecommerse.Model
 {
-    public class AddDbContext:DbContext 
+    public class AddDbContext : DbContext
     {
-        public AddDbContext(AddDbContext Options ) 
+        public AddDbContext(DbContextOptions<AddDbContext> options)
+            : base(options)
         {
-                    
         }
+
+        public DbSet<user> users { get; set; }
     }
 }
