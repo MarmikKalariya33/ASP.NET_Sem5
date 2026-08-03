@@ -4,7 +4,7 @@ using Ecommerse.DTOs;
 
 namespace Ecommerse.Services
 {
-    public class userservices
+    public class userservices : Iuserservices
     {
         private readonly AddDbContext _context;
 
@@ -13,13 +13,13 @@ namespace Ecommerse.Services
             _context = context;
         }
 
-        public async Task<loginDTO> GetUserdetails(loginDTO logindto)
+        public async Task<loginDTO> Getuserdetail(loginDTO obj)
         {
-            var user = await _context.users.FirstOrDefaultAsync(x => x.userName == logindto.userName
-            && x.userPass == logindto.userPass);
-            await _context.SaveChangesAsync();
+            var user = await _context.users.FirstOrDefaultAsync(x =>
+                x.userName == obj.userName &&
+                x.userPass == obj.userPass);
 
-            return logindto;
+            return obj;
         }
     }
 }
