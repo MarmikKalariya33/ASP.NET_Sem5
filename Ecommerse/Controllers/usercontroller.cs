@@ -9,9 +9,9 @@ namespace Ecommerse.Controllers
     [ApiController]
     public class usercontroller : ControllerBase
     {
-        private readonly userservices _userservices;
+        private readonly Iuserservices _userservices;
 
-        public usercontroller(userservices userservices)
+        public usercontroller(Iuserservices userservices)
         {
             _userservices = userservices;
         }
@@ -20,7 +20,7 @@ namespace Ecommerse.Controllers
         [Route("Getuserdetail")]
         public async Task<IActionResult> Getuserdetail(loginDTO obj)
         {
-            var user = await _userservices.GetUserdetails(obj);
+            var user = await _userservices.Getuserdetail(obj);
             return Ok(user);
         }
     }

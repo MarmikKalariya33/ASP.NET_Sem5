@@ -24,6 +24,16 @@ namespace Ecommerse
 
             builder.Services.AddScoped<Iuserservices,userservices>();
 
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowFrontend", policy =>
+                {
+                    policy.WithOrigins("http://localhost:4200") // Target client domain
+                          .AllowAnyHeader()
+                          .AllowAnyMethod();
+                });
+            });
+
             // Add services
             builder.Services.AddControllers();
 
@@ -41,6 +51,7 @@ namespace Ecommerse
             }
 
             app.UseHttpsRedirection();
+            app.UseCors("AllowFrontend");
 
             app.UseAuthorization();
 
