@@ -4,7 +4,7 @@ namespace Ecommerse.Model
 {
     public class AddDbContext : DbContext
     {
-        public AddDbContext(DbContextOptions<AddDbContext> options)
+        public AddDbContext(DbContextOptions options)
             : base(options)
         {
         }

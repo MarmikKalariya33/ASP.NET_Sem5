@@ -13,6 +13,7 @@ namespace Ecommerse.Services
             _context = context;
         }
 
+        // Login services
         public async Task<loginDTO> Getuserdetail(loginDTO obj)
         {
             var user = await _context.users.FirstOrDefaultAsync(x =>
@@ -20,6 +21,34 @@ namespace Ecommerse.Services
                 x.userPass == obj.userPass);
 
             return obj;
+        }
+
+        // Register services
+        public async Task<regis?> Register(RegisterDTO obj)
+        {
+            var user = await _context.users
+                .FirstOrDefaultAsync(x => x.userName == obj.userName);
+
+            if (user != null)
+            {
+                return null;
+            }
+
+            user newUser = new user
+            {
+                userName = obj.userName,
+                userPass = obj.userPass
+            };
+
+            await _context.users.AddAsync(newUser);
+
+            await _context.SaveChangesAsync();
+
+            return new regis
+            {
+                userName = obj.userName,
+                userPass = obj.userPass
+            };
         }
     }
 }
