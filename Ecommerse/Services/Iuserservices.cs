@@ -7,6 +7,6 @@ namespace Ecommerse.Services
     {
         Task<loginDTO> Getuserdetail(loginDTO obj);
 
-        Task<regis?> Register(RegisterDTO obj);
+        Task<ResponseDTOs> Register(RegisterDTO obj);
     }
 }

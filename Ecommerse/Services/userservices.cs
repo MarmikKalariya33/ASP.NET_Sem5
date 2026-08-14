@@ -1,6 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Ecommerse.Model;
+﻿using Azure;
 using Ecommerse.DTOs;
+using Ecommerse.Model;
+using Microsoft.EntityFrameworkCore;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Ecommerse.Services
 {
@@ -24,15 +26,25 @@ namespace Ecommerse.Services
         }
 
         // Register services
-        public async Task<regis?> Register(RegisterDTO obj)
+        public async Task<ResponseDTOs> Register(RegisterDTO obj)
         {
+            ResponseDTOs response = new ResponseDTOs();
             var user = await _context.users
                 .FirstOrDefaultAsync(x => x.userName == obj.userName);
 
             if (user != null)
             {
-                return null;
+                response.Success = false;
+                response.Message = "Username allady exist ";
+                return response;
             }
+            if(obj.userPass != obj.conformPass)
+            {
+                response.Success = false;
+                response.Message = "password and conform pass dont't match  ";
+                return response;
+            }
+
 
             user newUser = new user
             {
@@ -43,12 +55,9 @@ namespace Ecommerse.Services
             await _context.users.AddAsync(newUser);
 
             await _context.SaveChangesAsync();
-
-            return new regis
-            {
-                userName = obj.userName,
-                userPass = obj.userPass
-            };
+            response.Success = true;
+            response.Message = " successfull registration";
+            return response;
         }
     }
 }

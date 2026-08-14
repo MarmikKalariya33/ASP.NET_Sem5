@@ -30,20 +30,7 @@ namespace Ecommerse.Controllers
         {
             var user = await _userservices.Register(obj);
 
-            if (user == null)
-            {
-                return BadRequest(new
-                {
-                    message = "Username already exists"
-                });
-            }
-
-            return Ok(new
-            {
-                message = "Registration successful",
-                userName = user.userName,
-                userPass = user.userPass
-            });
+            return Ok(user);
         }
     }
 }
