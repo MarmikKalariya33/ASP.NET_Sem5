@@ -59,5 +59,47 @@ namespace Ecommerse.Services
             response.Message = " successfull registration";
             return response;
         }
+
+        // Change Password services 
+        public async Task<ResponseDTOs> ChangePassword(ChangePasswordDTO obj)
+        {
+            ResponseDTOs response = new ResponseDTOs();
+
+            // 1. Check User ID and Current Password
+            var user = await _context.users
+                .FirstOrDefaultAsync(x =>
+                    x.userId == obj.userId &&
+                    x.userPass == obj.CurrentPassword);
+
+            // 2. User not found / Current password incorrect
+            if (user == null)
+            {
+                response.Success = false;
+                response.Message = "Current password is incorrect.";
+                return response;
+            }
+
+            // 3. Check New Password and Confirm Password
+            if (obj.NewPassword != obj.ConfirmPassword)
+            {
+                response.Success = false;
+                response.Message = "New password and confirm password must be the same.";
+                return response;
+            }
+
+            // 4. Update New Password
+            user.userPass = obj.NewPassword;
+
+            // 5. Save changes into database
+            await _context.SaveChangesAsync();
+
+            // 6. Success response
+            response.Success = true;
+            response.Message = "Password changed successfully.";
+
+            return response;
+        }
+
     }
+   
 }

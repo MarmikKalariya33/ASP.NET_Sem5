@@ -32,5 +32,14 @@ namespace Ecommerse.Controllers
 
             return Ok(user);
         }
+
+        [HttpPost]
+        [Route("ChangePassword")]
+        public async Task<IActionResult> ChangePassword(ChangePasswordDTO obj)
+        {
+            var user = await _userservices.ChangePassword(obj);
+
+            return Ok(user);
+        }
     }
 }

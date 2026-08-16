@@ -8,5 +8,7 @@ namespace Ecommerse.Services
         Task<loginDTO> Getuserdetail(loginDTO obj);
 
         Task<ResponseDTOs> Register(RegisterDTO obj);
+        Task<ResponseDTOs> ChangePassword(ChangePasswordDTO obj);
+
     }
 }
